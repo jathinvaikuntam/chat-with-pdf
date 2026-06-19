@@ -25,7 +25,7 @@ def read_pdf(pdf_path):
     return pages
 
 
-def chunk_text(text, chunk_size=500):
+def chunk_text(text, chunk_size=500, overlap=50):
 
     chunks = []
 
@@ -37,6 +37,6 @@ def chunk_text(text, chunk_size=500):
 
         chunks.append(text[start:end])
 
-        start += chunk_size
+        start += chunk_size - overlap
 
     return chunks
