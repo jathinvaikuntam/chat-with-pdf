@@ -9,9 +9,6 @@ import google.generativeai as genai
 from dotenv import load_dotenv
 from Indexer import index_pdf
 
-# --------------------------
-# GEMINI SETUP
-# --------------------------
 
 load_dotenv()
 
@@ -25,9 +22,7 @@ model = genai.GenerativeModel(
     "gemini-2.5-flash"
 )
 
-# --------------------------
-# STREAMLIT PAGE
-# --------------------------
+
 
 st.set_page_config(
     page_title="Chat With PDF",
@@ -39,16 +34,12 @@ st.write(
     "Upload a PDF and ask questions."
 )
 
-# --------------------------
-# SESSION STATE
-# --------------------------
+
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# --------------------------
-# SIDEBAR
-# --------------------------
+
 
 with st.sidebar:
 
@@ -103,9 +94,7 @@ with st.sidebar:
                 "Upload a PDF first."
             )
 
-# --------------------------
-# CHROMA COLLECTION
-# --------------------------
+
 
 def get_collection(name):
 
@@ -115,9 +104,9 @@ def get_collection(name):
 
     return client.get_collection(name)
 
-# --------------------------
+
 # RAG RETRIEVAL
-# --------------------------
+
 
 def retrieve_chunks(
     question,
@@ -138,9 +127,9 @@ def retrieve_chunks(
 
     return documents, metadatas
 
-# --------------------------
+
 # GEMINI ANSWER
-# --------------------------
+
 
 def ask_gemini(
     question,
@@ -182,9 +171,7 @@ Include page numbers when possible.
 
     return response.text
 
-# --------------------------
-# DISPLAY CHAT
-# --------------------------
+
 
 for message in st.session_state.messages:
 
@@ -196,9 +183,7 @@ for message in st.session_state.messages:
             message["content"]
         )
 
-# --------------------------
-# CHAT INPUT
-# --------------------------
+
 
 question = st.chat_input(
     "Ask about the PDF..."
@@ -264,9 +249,7 @@ if question:
             "Please index a PDF first."
         )
 
-# --------------------------
-# CLEAR CHAT
-# --------------------------
+
 
 if st.sidebar.button(
     "Clear Chat"
